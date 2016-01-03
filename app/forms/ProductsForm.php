@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Forms;
+
 use Phalcon\Forms\Form;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Hidden;
@@ -7,6 +9,8 @@ use Phalcon\Forms\Element\Select;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Email;
 use Phalcon\Validation\Validator\Numericality;
+
+use App\Models\ProductTypes;
 
 class ProductsForm extends Form
 {

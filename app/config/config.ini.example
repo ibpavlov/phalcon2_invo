@@ -2,8 +2,8 @@
 adapter  = Mysql
 host     = localhost
 username = root
-password =
-dbname   = invo
+password = 
+dbname   = test_phalcon
 
 [application]
 controllersDir = app/controllers/
@@ -12,4 +12,4 @@ viewsDir       = app/views/
 pluginsDir     = app/plugins/
 formsDir       = app/forms/
 libraryDir     = app/library/
-baseUri        = /invo/
+baseUri        = /

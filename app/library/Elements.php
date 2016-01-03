@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Libary;
+
 use Phalcon\Mvc\User\Component;
 
 /**

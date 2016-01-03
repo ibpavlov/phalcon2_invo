@@ -13,5 +13,12 @@ $loader->registerDirs(
 		APP_PATH . $config->application->modelsDir,
 		APP_PATH . $config->application->formsDir,
 	)
-)->register();
+)->registerNamespaces(array(
+		'App\Models'      => APP_PATH . $config->application->modelsDir,
+		'App\Controllers' => APP_PATH . $config->application->controllersDir,
+		'App\Forms'       => APP_PATH . $config->application->formsDir,
+		'App\Plugins'     => APP_PATH . $config->application->pluginsDir,
+		'App\Libary'      => APP_PATH . $config->application->libraryDir,
+))->register();
 
+//require APP_PATH . "/vendor/autoload.php";

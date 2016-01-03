@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Plugins;
+
 use Phalcon\Acl;
 use Phalcon\Acl\Role;
 use Phalcon\Acl\Resource;

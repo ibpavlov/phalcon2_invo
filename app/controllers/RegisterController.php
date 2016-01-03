@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Forms\RegisterForm;
+use App\Models\Users;
+
 /**
  * SessionController
  *
@@ -38,7 +43,7 @@ class RegisterController extends ControllerBase
             $user->password = sha1($password);
             $user->name = $name;
             $user->email = $email;
-            $user->created_at = new Phalcon\Db\RawValue('now()');
+            $user->created_at = new \Phalcon\Db\RawValue('now()');
             $user->active = 'Y';
             if ($user->save() == false) {
                 foreach ($user->getMessages() as $message) {

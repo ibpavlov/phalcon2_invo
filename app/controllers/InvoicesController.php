@@ -1,7 +1,11 @@
 <?php
 
+namespace App\Controllers;
+
 use Phalcon\Flash;
 use Phalcon\Session;
+
+use App\Models\Users;
 
 class InvoicesController extends ControllerBase
 {

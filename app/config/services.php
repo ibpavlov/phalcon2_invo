@@ -10,6 +10,10 @@ use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Flash\Session as FlashSession;
 use Phalcon\Events\Manager as EventsManager;
 
+use App\Plugins\SecurityPlugin;
+use App\Plugins\NotFoundPlugin;
+use App\Libary\Elements;
+
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
  */
@@ -34,6 +38,7 @@ $di->set('dispatcher', function () use ($di) {
 
 	$dispatcher = new Dispatcher;
 	$dispatcher->setEventsManager($eventsManager);
+	$dispatcher->setDefaultNamespace('app\controllers');
 
 	return $dispatcher;
 });
@@ -124,3 +129,15 @@ $di->set('flash', function () {
 $di->set('elements', function () {
 	return new Elements();
 });
+
+/**
+ * Add routing capabilities
+ */
+$di->set(
+		'router',
+		function () {
+			require APP_PATH . "app/config/routes.php";
+
+			return $router;
+		}
+);

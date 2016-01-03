@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Models;
+
 use Phalcon\Mvc\Model;
 
 class Companies extends Model
