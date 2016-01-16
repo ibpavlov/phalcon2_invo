@@ -41,10 +41,12 @@ class SecurityPlugin extends Plugin
 
 			//Private area resources
 			$privateResources = array(
-				'companies'    => array('index', 'search', 'new', 'edit', 'save', 'create', 'delete'),
-				'products'     => array('index', 'search', 'new', 'edit', 'save', 'create', 'delete'),
-				'producttypes' => array('index', 'search', 'new', 'edit', 'save', 'create', 'delete'),
-				'invoices'     => array('index', 'profile')
+				'App\Controllers\companies'    => array('index', 'search', 'new', 'edit', 'save', 'create', 'delete'),
+				'App\Controllers\products'     => array('index', 'search', 'new', 'edit', 'save', 'create', 'delete'),
+				'App\Controllers\producttypes' => array('index', 'search', 'new', 'edit', 'save', 'create', 'delete'),
+				'App\Controllers\invoices'     => array('index', 'profile'),
+
+				'App\Controllers\Api\V1\about' => array('index'),
 			);
 			foreach ($privateResources as $resource => $actions) {
 				$acl->addResource(new Resource($resource), $actions);
@@ -52,12 +54,12 @@ class SecurityPlugin extends Plugin
 
 			//Public area resources
 			$publicResources = array(
-				'index'      => array('index'),
-				'about'      => array('index'),
-				'register'   => array('index'),
-				'errors'     => array('show401', 'show404', 'show500'),
-				'session'    => array('index', 'register', 'start', 'end'),
-				'contact'    => array('index', 'send')
+				'App\Controllers\index'    => array('index'),
+				'App\Controllers\about'    => array('index'),
+				'App\Controllers\register' => array('index'),
+				'App\Controllers\errors'   => array('show401', 'show404', 'show500'),
+				'App\Controllers\session'  => array('index', 'register', 'start', 'end'),
+				'App\Controllers\contact'  => array('index', 'send'),
 			);
 			foreach ($publicResources as $resource => $actions) {
 				$acl->addResource(new Resource($resource), $actions);
@@ -103,14 +105,17 @@ class SecurityPlugin extends Plugin
 			$role = 'Users';
 		}
 
+		$namespace  = $dispatcher->getNamespaceName();
 		$controller = $dispatcher->getControllerName();
-		$action = $dispatcher->getActionName();
+		$path       = $namespace . '\\' . $controller;
+		$action     = $dispatcher->getActionName();
 
 		$acl = $this->getAcl();
 
-		$allowed = $acl->isAllowed($role, $controller, $action);
+		$allowed = $acl->isAllowed($role, $path, $action);
 		if ($allowed != Acl::ALLOW) {
 			$dispatcher->forward(array(
+				'namespace'  => 'App\Controllers',
 				'controller' => 'errors',
 				'action'     => 'show401'
 			));
