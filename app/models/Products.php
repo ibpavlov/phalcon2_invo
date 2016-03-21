@@ -39,8 +39,9 @@ class Products extends Model
 	 */
 	public function initialize()
 	{
-		$this->belongsTo('product_types_id', 'ProductTypes', 'id', array(
-			'reusable' => true
+		$this->belongsTo('product_types_id', 'App\Models\ProductTypes', 'id', array(
+			'reusable'  => true,
+			'alias'		=> "ProductTypes"
 		));
 	}
 
